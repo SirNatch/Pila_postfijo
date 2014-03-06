@@ -1,6 +1,8 @@
 package postfijo;
 
-public class Cola {
+import postfijo.Nodo;
+
+public class Pila {
     Nodo raiz;
     Nodo fondo;
 
@@ -22,34 +24,39 @@ public class Cola {
         }
     }
     
-    public char pop(){ 
-        if( !vacia() ){
-            char dato = raiz.getDato();
+    public Nodo pop(){ 
+        
+        if(vacia())
+            return null;
+        else{
             if(raiz == fondo){
+                Nodo res = new Nodo(raiz.getDato());
                 raiz = null;
                 fondo = null;
+                return res;
             }else{
-                raiz = raiz.getLiga();
+                Nodo p = raiz;
+                while(p.getLiga()!=fondo){
+                    p=p.getLiga();
+                }
+                Nodo q = new Nodo(fondo.getDato());
+                fondo = p;
+                fondo.setLiga(null);
+                return q;
             }
-            return dato;
-        }else
-            return '#';
+        }
         
     }
     
-    public char peek(){ 
-        if( !vacia() )
-           return raiz.getDato(); 
-        return '#';
+    public Nodo peek(){ 
+           return fondo; 
     }
     
     public String imprimir(){
         String aux = "";
         while(!vacia()){
-            aux = aux + pop();
+            aux = aux + pop().getDato();
         }
         return aux;
     }
-    
-
 }

@@ -1,5 +1,7 @@
 package postfijo;
 
+import postfijo.Pila;
+
 
 public class Posfijo {
     
@@ -11,50 +13,52 @@ public class Posfijo {
     }
     
     public int prioridad(char x){
+        
         if(x == '^')
             return 3;
         else if(x == '*' || x == '/')
             return 2;
-        else
+        else if(x == '+' || x == '-')
             return 1;
+        else return 0;
              
     }
     
     public String conv_posfija(String ecuacion){
         char [] sim = ecuacion.toCharArray();
         int i = 0;
-        Cola cola = new Cola();
+        Pila lista = new Pila();
         String epos = "";
           
         while( i < sim.length ){
             char aux = sim[i];
             i++;
             if(aux == '('){
-                cola.push(aux);
+                lista.push(aux);
             }else{
-                if(aux == ')'){
-                    while(cola.peek() != '('){
-                     epos = epos + cola.pop();
-                    }
-                    cola.pop();
+                if(aux==')'){
+                    while(lista.peek().getDato() != '('){
+                    epos = epos+lista.pop().getDato();
+                                        
+                }
+                    lista.pop();
                 }else{
                     if(!esOperador(aux)){
                         epos = epos + aux;
                     }else{
-                        //llamar pila_vacia
-                        while(!cola.vacia() && prioridad(aux)< prioridad(cola.peek()) ){
+                        while(!lista.vacia() && prioridad(aux)<= prioridad(lista.peek().getDato())){
+                            epos = epos+lista.pop().getLiga();
 
-                            epos = epos + cola.pop();
-                        //llamar pila_vacia
                         }
-                        cola.push(aux);
-                    }  
+                        lista.push(aux);
+                    }
                 }
             }
         }
-        //llmara pila vacia
-        while(!cola.vacia()){
-            epos = epos + cola.pop();
+        
+        while(!lista.vacia()){
+            epos = epos + lista.pop().getDato();
+ 
         }
         return epos;
     }      
