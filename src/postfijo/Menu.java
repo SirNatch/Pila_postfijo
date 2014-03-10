@@ -9,10 +9,7 @@ public class Menu {
     
     public static void main(String[] args) {
         Posfijo prueba = new Posfijo();
-        Pila lista = new Pila();
-        lista.push('2');
-        lista.push('3');
-        String cadena ="(5+3)*7";
+        String cadena ="(12+5)/5-(3+9)";
         System.out.println(prueba.conv_posfija(cadena));
     }
     

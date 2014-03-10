@@ -2,7 +2,7 @@ package postfijo;
 
 import postfijo.Nodo;
 
-public class Pila {
+public class Pila<T> {
     Nodo raiz;
     Nodo fondo;
 
@@ -13,7 +13,7 @@ public class Pila {
             return false;
     }
     
-    public void push(char dato){
+    public void push(T dato){
         Nodo nuevo = new Nodo(dato);
         if(vacia()){
             raiz = nuevo;                       

@@ -2,14 +2,14 @@ package postfijo;
 
 public class Nodo<T> {
         
-    private char signo;
+    private T signo;
     private Nodo<T> liga;
     
     Nodo(){
         
     }
     
-    Nodo(char info){
+    Nodo(T info){
         this.signo=info;
         this.liga=null;
     }
@@ -17,14 +17,14 @@ public class Nodo<T> {
     /**
      * @return the dato
      */
-    public char getDato() {
+    public T getDato() {
         return signo;
     }
 
     /**
      * @param dato the dato to set
      */
-    public void setDato(char dato) {
+    public void setDato(T dato) {
         this.signo = dato;
     }
 
